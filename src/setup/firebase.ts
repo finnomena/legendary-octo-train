@@ -1,7 +1,9 @@
-import firebase from 'firebase/app';
-import 'firebase/auth';
-import 'firebase/firestore';
-import 'firebase/database';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+
+/**
+ * Setup firebase with custom config 🔥
+ */
 
 // this is where your firebase app values you copied will go
 const firebaseConfig = {
@@ -14,6 +16,8 @@ const firebaseConfig = {
   measurementId: 'G-7LN34G7H4Z',
 };
 
-firebase.initializeApp(firebaseConfig);
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+}
 
 export default firebase;
