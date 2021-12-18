@@ -1,6 +1,10 @@
 {
   "env": { "browser": true, "es2021": true },
-  "globals": { "Atomics": "readonly", "SharedArrayBuffer": "readonly" },
+  "globals": {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly",
+    "JSX": true
+  },
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
@@ -45,7 +49,9 @@
         "component": true,
         "html": false
       }
-    ]
+    ],
+    "react/jsx-props-no-spreading": "off",
+    "react/prop-types": "off"
   },
   "settings": {
     "import/resolver": {

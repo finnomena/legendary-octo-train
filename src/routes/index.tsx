@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router';
 // Pages
 import { SignInPage, SignOutPage } from '../pages/auth';
 import ExamplePage from '../pages/Example';
+import HomePage from '../pages/Home';
 import MyEventsPage from '../pages/my-events';
 import NotFoundPage from '../pages/NotFound';
 
@@ -16,8 +17,9 @@ const AppRoutes = () => {
       {/* Event */}
       <Route path="/my-events" element={<MyEventsPage />} />
 
-      <Route index element={<ExamplePage />} />
+      <Route index element={<HomePage />} />
       <Route path="*" element={<NotFoundPage />} />
+      <Route path="/example" element={<ExamplePage />} />
     </Routes>
   );
 };

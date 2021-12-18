@@ -1,7 +1,8 @@
-import React from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { textState } from "../../store/atoms";
-import { charCountState } from "../../store/selectors";
+import React from 'react';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import Button from '../../components/Button';
+import { textState } from '../../store/atoms';
+import { charCountState } from '../../store/selectors';
 
 const ExamplePage = () => {
   const [text, setText] = useRecoilState(textState);
@@ -12,7 +13,7 @@ const ExamplePage = () => {
   };
 
   return (
-    <div>
+    <div className="m-3">
       <input
         type="text"
         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -23,6 +24,12 @@ const ExamplePage = () => {
       Echo: {text}
       <br />
       Character Count: {count}
+      <hr />
+      <div className="button">
+        <Button type="button" color="green" size="md">
+          HI, Copter Phanuwat
+        </Button>
+      </div>
     </div>
   );
 };
