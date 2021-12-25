@@ -1,18 +1,15 @@
-import firebase from '../../setup/firebase';
+import { GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
+import { auth } from '../../setup/firebase';
 
-const provider = new firebase.auth.GoogleAuthProvider();
+export const signInWithGoogle = async () => {
+  const provider = new GoogleAuthProvider();
+  provider.setCustomParameters({ prompt: 'select_account' });
 
-/**
- * Config select account
- * @see {@link https://user-images.githubusercontent.com/1544881/61406883-a5fc2400-a891-11e9-8ed0-250250d2c6cc.png}
- */
-
-provider.setCustomParameters({ prompt: 'select_account' });
-
-export const signInWithGoogle = () => firebase.auth().signInWithPopup(provider);
-
-export const signOut = () => firebase.auth().signOut();
-
-export const signUp = () => {
-  // TODO:: Implement logic
+  try {
+    await signInWithPopup(auth, provider);
+  } catch (error) {
+    console.log(error);
+  }
 };
+
+export const logout = () => signOut(auth);

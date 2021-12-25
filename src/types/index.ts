@@ -9,3 +9,8 @@ export type Varient =
   | 'cyan';
 
 export type Size = 'sm' | 'md' | 'lg';
+
+export type Room = {
+  name: string;
+  createdBy: string;
+};

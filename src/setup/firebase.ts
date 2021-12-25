@@ -1,5 +1,13 @@
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/auth';
+import { initializeApp } from 'firebase/app';
+import { getAuth } from 'firebase/auth';
+import {
+  collection,
+  CollectionReference,
+  doc,
+  DocumentData,
+  DocumentReference,
+  getFirestore,
+} from 'firebase/firestore';
 
 /**
  * Setup firebase with custom config 🔥
@@ -16,8 +24,17 @@ const firebaseConfig = {
   measurementId: 'G-7LN34G7H4Z',
 };
 
-if (!firebase.apps.length) {
-  firebase.initializeApp(firebaseConfig);
-}
+const firebaseApp = initializeApp(firebaseConfig);
 
-export default firebase;
+// Firebase Services
+export const auth = getAuth(firebaseApp);
+export const db = getFirestore(firebaseApp);
+
+export const getCollectionRef = <T = DocumentData>(name: string) =>
+  collection(db, name) as unknown as CollectionReference<T>;
+
+export const getDocRef = <T = DocumentData>(path: string, id?: string) => {
+  const ref = id ? doc(db, path, id) : doc(db, path);
+
+  return ref as unknown as DocumentReference<T>;
+};

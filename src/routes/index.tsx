@@ -1,25 +1,30 @@
 import React from 'react';
 import { Route, Routes } from 'react-router';
-// Pages
-import { SignInPage, SignOutPage } from '../pages/auth';
+import AppLayout from '../layouts';
+import SignOut from '../pages/auth/signOut';
 import ExamplePage from '../pages/Example';
 import HomePage from '../pages/Home';
-import MyEventsPage from '../pages/my-events';
+import MyPage from '../pages/My';
 import NotFoundPage from '../pages/NotFound';
+import PrivateRoute from './PrivateRoute';
 
 const AppRoutes = () => {
   return (
     <Routes>
       {/* Authentication */}
-      <Route path="/auth" element={<SignInPage />} />
-      <Route path="/auth/logout" element={<SignOutPage />} />
-
-      {/* Event */}
-      <Route path="/my-events" element={<MyEventsPage />} />
+      <Route path="/logout" element={<SignOut />} />
 
       <Route index element={<HomePage />} />
-      <Route path="*" element={<NotFoundPage />} />
       <Route path="/example" element={<ExamplePage />} />
+
+      {/* Private Route */}
+      <Route element={<PrivateRoute />}>
+        <Route element={<AppLayout />}>
+          <Route path="/my" element={<MyPage />} />
+        </Route>
+      </Route>
+
+      <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
 };

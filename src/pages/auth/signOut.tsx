@@ -1,16 +1,16 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { signOut } from '../../services/firebase/auth';
+import { logout } from '../../services/firebase/auth';
 
-const SignOutPage = () => {
+const SignOut = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    signOut();
+    logout();
     navigate('/');
   }, []);
 
   return <h1>Signed Out</h1>;
 };
 
-export default SignOutPage;
+export default SignOut;
