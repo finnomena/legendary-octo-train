@@ -15,8 +15,16 @@ const ShowQR = (props: ShowQRProps) => {
   return (
     <Modal title="QR Code" show={show} onHide={onHide}>
       <ModalBody>
-        <div className="flex justify-center items-center m-4">
-          <QRCode size={200} value={`${window.location.origin}/room/${id}`} />
+        <div className="flex flex-col gap-4 justify-center items-center">
+          <QRCode
+            size={200}
+            value={`${window.location.origin}/room/${id}`}
+            renderAs="svg"
+            className="mx-auto"
+          />
+          <h2>
+            Code: <span className="font-semibold">{id}</span>
+          </h2>
         </div>
       </ModalBody>
       <ModalFooter>

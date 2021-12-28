@@ -5,9 +5,7 @@ type ModalFooterProps = {
 };
 
 const ModalFooter = ({ children }: ModalFooterProps) => {
-  return (
-    <div className="grid gap-2 bg-gray-50 px-4 py-3 sm:px-6">{children}</div>
-  );
+  return <div className="grid gap-2 bg-gray-50 px-4 py-3">{children}</div>;
 };
 
 export default ModalFooter;

@@ -1,7 +1,9 @@
-import { nanoid } from 'nanoid';
+import { customAlphabet } from 'nanoid';
 
-const ID_CHAR = 8;
+const Alphabet =
+  '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
-export const genRoomDocID = () => nanoid(ID_CHAR);
-
-export const a = 0;
+export default function ID(size = 8): string {
+  const nanoid = customAlphabet(Alphabet, size);
+  return nanoid();
+}

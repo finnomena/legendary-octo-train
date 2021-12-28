@@ -11,7 +11,7 @@ const HomePage = () => {
   };
 
   return (
-    <div className="flex flex-col mx-auto justify-center items-center space-y-12 h-screen p-4">
+    <div className="flex flex-col mx-auto justify-center items-center space-y-12 h-screen max-w-md p-4">
       <div className="logo">
         <h1 className="text-2xl font-bold">Home Logo</h1>
       </div>

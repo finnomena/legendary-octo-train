@@ -1,4 +1,4 @@
-import React, { Fragment, useRef } from 'react';
+import React, { Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 
 interface ModalProp {
@@ -11,17 +11,15 @@ interface ModalProp {
 
 const Modal = (props: ModalProp) => {
   const { children, title, show, onHide } = props;
-  const cancelButtonRef = useRef(null);
 
   return (
-    <Transition.Root show={show} as={Fragment}>
+    <Transition appear show={show} as={Fragment}>
       <Dialog
         as="div"
-        className="fixed z-10 inset-0 overflow-y-auto"
-        initialFocus={cancelButtonRef}
+        className="fixed inset-0 z-10 overflow-y-auto"
         onClose={onHide}
       >
-        <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 sm:block sm:p-0">
+        <div className="min-h-screen px-4 text-center">
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
@@ -31,44 +29,39 @@ const Modal = (props: ModalProp) => {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <Dialog.Overlay className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+            <Dialog.Overlay className="fixed inset-0 bg-black opacity-30" />
           </Transition.Child>
 
           {/* This element is to trick the browser into centering the modal contents. */}
           <span
-            className="hidden sm:inline-block sm:align-middle sm:h-screen"
+            className="inline-block h-screen align-middle"
             aria-hidden="true"
           >
             &#8203;
           </span>
+
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
-            enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-            enterTo="opacity-100 translate-y-0 sm:scale-100"
+            enterFrom="opacity-0 scale-95"
+            enterTo="opacity-100 scale-100"
             leave="ease-in duration-200"
-            leaveFrom="opacity-100 translate-y-0 sm:scale-100"
-            leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+            leaveFrom="opacity-100 scale-100"
+            leaveTo="opacity-0 scale-95"
           >
-            <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg w-full">
-              <div className="bg-white sm:p-6 sm:pb-4">
-                <div className="sm:flex sm:items-start">
-                  <div className="sm:mt-0 sm:ml-4 sm:text-left">
-                    <Dialog.Title
-                      as="h1"
-                      className="text-lg leading-6 pt-5 px-4 text-center font-semibold text-gray-900 mb-2"
-                    >
-                      {title}
-                    </Dialog.Title>
-                    {children}
-                  </div>
-                </div>
-              </div>
+            <div className="inline-block items-center align-center bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg w-full">
+              <Dialog.Title
+                as="h3"
+                className="text-lg font-medium text-center p-4 pb-2 leading-6 text-gray-900"
+              >
+                {title}
+              </Dialog.Title>
+              {children}
             </div>
           </Transition.Child>
         </div>
       </Dialog>
-    </Transition.Root>
+    </Transition>
   );
 };
 

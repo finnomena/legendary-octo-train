@@ -1,11 +1,11 @@
-import React from 'react';
 import { doc, setDoc } from 'firebase/firestore';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
+import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import * as Yup from 'yup';
 import { Button, Modal, ModalBody, ModalFooter } from '../../../components';
 import { auth, db } from '../../../setup/firebase';
-import { genRoomDocID } from '../../../utils/id';
+import { ID } from '../../../utils';
 
 type CreateRoomDialogProps = {
   show: boolean;
@@ -28,9 +28,12 @@ const CreateRoomDialog = (props: CreateRoomDialogProps) => {
 
   const handleSubmit = async (values: Values) => {
     try {
-      await setDoc(doc(db, 'rooms', genRoomDocID()), {
+      // Generate ID
+      const id = ID();
+      await setDoc(doc(db, 'rooms', id), {
         name: values.eventName,
         createdBy: user?.email,
+        createdAt: new Date(),
       });
       onHide(!show);
     } catch (error) {

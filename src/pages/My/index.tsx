@@ -11,9 +11,9 @@ import CreateRoomDialog from './dialog/CreateRoomDialog';
 const MyPage = () => {
   const [show, setShow] = useState<boolean>(false);
   const [user] = useAuthState(auth);
-
   const [rooms, loading, error] = useCollectionData<Room, 'id'>(
-    getRoomsByEmailQuery(user?.email ?? '')
+    getRoomsByEmailQuery(user?.email ?? ''),
+    { idField: 'id', snapshotListenOptions: { includeMetadataChanges: true } }
   );
 
   if (error) {
@@ -28,7 +28,9 @@ const MyPage = () => {
     <>
       <div className="flex flex-col gap-6">
         <div className="flex justify-between items-center">
-          <h1 className="font-semibold text-lg">My Rooms</h1>
+          <h1 className="font-semibold text-lg">
+            Hi, <span className="font-normal">{user?.displayName}</span>
+          </h1>
           {rooms?.length !== 0 && (
             <Button size="md" color="black" onClick={() => setShow(true)}>
               Create
