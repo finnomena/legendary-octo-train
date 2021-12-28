@@ -4,6 +4,7 @@ import AppLayout from '../layouts';
 import SignOut from '../pages/auth/signOut';
 import ExamplePage from '../pages/Example';
 import HomePage from '../pages/Home';
+import JoinPage from '../pages/Join';
 import MyPage from '../pages/My';
 import NotFoundPage from '../pages/NotFound';
 import PrivateRoute from './PrivateRoute';
@@ -15,6 +16,7 @@ const AppRoutes = () => {
       <Route path="/logout" element={<SignOut />} />
 
       <Route index element={<HomePage />} />
+      <Route path="/join" element={<JoinPage />} />
       <Route path="/example" element={<ExamplePage />} />
 
       {/* Private Route */}
