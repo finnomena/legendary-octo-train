@@ -1,18 +1,30 @@
-import React, { useRef } from 'react';
-import { useNavigate } from 'react-router';
+import React from 'react';
+import { useDocumentDataOnce } from 'react-firebase-hooks/firestore';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Button } from '../../components';
+import { getRoomByCodeQuery } from '../../queries/room';
+import JoinForm from './components/JoinForm';
 
 const JoinPage = () => {
   const navigate = useNavigate();
-  const inputRef = useRef<HTMLInputElement>(null);
+  const [searchParams] = useSearchParams();
+  const code = searchParams.get('c');
 
-  const handleClick = () => {
-    const to = inputRef.current?.value;
+  if (!code) {
+    return <p>Invalid</p>;
+  }
 
-    if (to) {
-      navigate(to, { replace: true });
-    }
-  };
+  const [room, loading, error] = useDocumentDataOnce(getRoomByCodeQuery(code));
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
+  if (error) {
+    console.log(error);
+
+    return <p>Loading...</p>;
+  }
 
   return (
     <div className="wrapper px-4 py-8 flex flex-col gap-16 h-screen justify-center items-center">
@@ -20,22 +32,11 @@ const JoinPage = () => {
         <h1 className="text-3xl text-center font-semibold">Pop Clap 👏🏻</h1>
       </div>
       <div className="flex flex-col gap-4 px-4 py-2 self-stretch">
-        <div className="join">
-          <input
-            type="text"
-            placeholder="Enter Join Code"
-            ref={inputRef}
-            maxLength={10}
-            className="bg-gray-50 border-2 border-gray-300 text-gray-900 text-center rounded-lg focus:ring-blue-500 focus-visible:outline-none focus:border-blue-500 block w-full p-2.5"
-          />
-        </div>
-        <button
-          type="button"
-          onClick={handleClick}
-          className="bg-white text-gray-700 border border-gray-300 text-center px-4 py-2  shadow-sm focus:ring-2 focus:ring-offset-2 ring-offset-gray-50 ring-blue-500 font-semibold rounded-lg"
-        >
-          Join
-        </button>
+        {room ? (
+          <JoinForm code={code} />
+        ) : (
+          <p>No room code, please try again later.</p>
+        )}
         <span className="text-center text-slate-500">Or</span>
         <Button
           type="button"

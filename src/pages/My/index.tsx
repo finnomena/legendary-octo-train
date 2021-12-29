@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { Button } from '../../components';
-import { getRoomsByEmailQuery } from '../../queries/rooms';
+import { getRoomsByEmailQuery } from '../../queries/room';
 import { auth } from '../../setup/firebase';
-import { Room } from '../../types';
 import RoomCard from './components/RoomCard';
 import CreateRoomDialog from './dialog/CreateRoomDialog';
 
