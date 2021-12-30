@@ -2,7 +2,6 @@ import React from 'react';
 import { useObjectVal } from 'react-firebase-hooks/database';
 import { Boop } from '../../components';
 import { readClickByRoomRef, writeClickByRoomRef } from '../../queries/room';
-import styles from './Click.module.css';
 
 type ClickProps = {
   id: string;
