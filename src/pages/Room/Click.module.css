@@ -1,0 +1,13 @@
+.cat {
+  height: 300px;
+  width: 100%;
+  max-width: 800px;
+  background-position: bottom;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-image: url('https://popcat.click/img/p.1e9d00be.png');
+}
+
+.cat:active {
+  background-image: url('https://popcat.click/img/op.353767c3.png');
+}

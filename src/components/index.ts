@@ -3,6 +3,7 @@ export { default as AppBar } from './AppBar';
 // Common
 export { default as Button } from './Button';
 export { default as Card } from './Card';
+export { default as Boop } from './Boop';
 
 // Form
 export { default as Input } from './Input';

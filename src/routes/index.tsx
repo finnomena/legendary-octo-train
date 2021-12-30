@@ -1,6 +1,6 @@
 import React from 'react';
 import { Outlet, Route, Routes } from 'react-router';
-import AppLayout from '../layouts';
+import { AppLayout, RoomLayout } from '../layouts';
 import SignOut from '../pages/auth/signOut';
 import HomePage from '../pages/Home';
 import JoinPage from '../pages/Join';
@@ -41,7 +41,7 @@ const AppRoutes = () => {
         <Route index element={<JoinPage />} />
         {/* Protect */}
         <Route element={<LocalPrivateRoute />}>
-          <Route element={<AppLayout />}>
+          <Route element={<RoomLayout />}>
             <Route path="room/:id" element={<RoomPage />} />
           </Route>
         </Route>

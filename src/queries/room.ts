@@ -1,3 +1,4 @@
+import { increment, ref, set } from 'firebase/database';
 import {
   doc,
   DocumentReference,
@@ -8,7 +9,7 @@ import {
   where,
 } from 'firebase/firestore';
 import { IRoom } from '../interfaces';
-import { db, getCollectionRef, getDocRef } from '../setup/firebase';
+import { db, getCollectionRef, getDocRef, rtDb } from '../setup/firebase';
 
 export const getRoomByCodeQuery = (id: string): DocumentReference<IRoom> =>
   getDocRef('rooms', id);
@@ -30,3 +31,8 @@ export const getRoomsByEmailQuery = (email: string): Query<IRoom> =>
     where('createdBy', '==', email),
     orderBy('createdAt', 'desc')
   );
+
+export const readClickByRoomRef = (c: string) => ref(rtDb, `rooms/${c}/click`);
+
+export const writeClickByRoomRef = (c: string) =>
+  set(ref(rtDb, `rooms/${c}/click`), increment(1));
