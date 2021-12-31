@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useListVals } from 'react-firebase-hooks/database';
-import { Button } from '../../components';
+import { Button, Error, Loading } from '../../components';
 import { IRoom } from '../../interfaces';
 import { fetchMyRoomList } from '../../queries';
 import { auth } from '../../setup/firebase';
 import RoomCard from './components/RoomCard';
-import CreateRoomDialog from './dialog/CreateRoomDialog';
+import CreateRoom from './dialog/CreateRoom';
 
 const MyPage = () => {
   const [show, setShow] = useState<boolean>(false);
@@ -16,15 +16,12 @@ const MyPage = () => {
     { keyField: 'id' }
   );
 
-  console.log(rooms);
-  console.log(error);
-
   if (error) {
-    return <strong>Error: {JSON.stringify(error)}</strong>;
+    return <Error message={error?.message} />;
   }
 
   if (loading) {
-    return <span>Collection: Loading...</span>;
+    return <Loading message="loading..." />;
   }
 
   return (
@@ -44,9 +41,9 @@ const MyPage = () => {
         {/* Empty Docs */}
         {rooms?.length === 0 && (
           <div className="text-center w-full p-5 border border-dashed border-slate-200 rounded-lg flex flex-col gap-4">
-            <h1>Welcome to Project name</h1>
+            <h1>Welcome to Popclap 👏🏻</h1>
             <div className="h-32 w-32 bg-gray-200 mx-auto"></div>
-            <p className="text-gray-400">You don’t have any event yet</p>
+            <p className="text-gray-500">You don’t have room</p>
             <Button color="blue" size="md" onClick={() => setShow(true)}>
               Create
             </Button>
@@ -56,11 +53,11 @@ const MyPage = () => {
         {/* Value Doc */}
         {rooms?.length !== 0 &&
           rooms?.map((room) => {
-            return <RoomCard room={room} key={room.id} />;
+            return <RoomCard id={room.id} name={room.name} key={room.id} />;
           })}
       </div>
       {/* Dialog */}
-      <CreateRoomDialog show={show} onHide={setShow} />
+      <CreateRoom show={show} onHide={setShow} />
     </>
   );
 };

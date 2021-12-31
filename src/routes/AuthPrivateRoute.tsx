@@ -1,6 +1,7 @@
 import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
+import { Loading } from '../components';
 import { auth } from '../setup/firebase';
 
 const AuthPrivateRoute = () => {
@@ -8,11 +9,7 @@ const AuthPrivateRoute = () => {
   const location = useLocation();
 
   if (loading) {
-    return (
-      <div className="h-screen flex justify-center items-center">
-        <p className="text-black">Initialising User...</p>
-      </div>
-    );
+    return <Loading message="Initialising User..." full />;
   }
 
   if (error) {

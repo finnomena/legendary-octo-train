@@ -6,7 +6,6 @@ import HomePage from '../pages/Home';
 import JoinPage from '../pages/Join';
 import MyPage from '../pages/My';
 import NotFoundPage from '../pages/NotFound';
-import RoomPage from '../pages/Room';
 import AuthPrivateRoute from './AuthPrivateRoute';
 
 /**
@@ -39,19 +38,8 @@ const AppRoutes = () => {
 
       <Route path="join" element={<RoomLayout />}>
         <Route index element={<JoinPage />} />
-        <Route path=":id" element={<RoomPage />} />
-      </Route>
-
-      {/* <Route path="join" element={<JoinPage />}>
         <Route path=":id" element={<JoinPage />} />
-
-        <Route element={<LocalPrivateRoute />}>
-          <Route path="pre-join/:id" element={<PreJoinPage />} />
-          <Route element={<AppLayout />}>
-            <Route path="rooms/:id" element={<RoomPage />} />
-          </Route>
-        </Route>
-      </Route> */}
+      </Route>
 
       <Route path="*" element={<NotFoundPage />} />
     </Routes>

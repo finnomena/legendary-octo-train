@@ -1,9 +1,10 @@
-export { default as AppBar } from './AppBar';
-
 // Common
 export { default as Button } from './Button';
 export { default as Card } from './Card';
 export { default as Boop } from './Boop';
+export { default as Logo } from './Logo';
+export { default as Error } from './Error';
+export { default as Loading } from './Loading';
 
 // Form
 export { default as Input } from './Input';

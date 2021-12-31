@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useSpring, animated } from 'react-spring';
-import useSound from 'use-sound';
 import cx from 'classnames';
 
-import boopSound from './pop-cat-original-meme_3ObdYkj.mp3';
+import boopSrc from './pop-cat-original-meme_3ObdYkj.mp3';
 
 type BoopProps = {
   children: React.ReactNode;
@@ -16,7 +15,7 @@ type BoopProps = {
 const Boop = (props: BoopProps) => {
   const { children, className, onClick, timing, scale } = props;
   const [state, setState] = useState<boolean>(false);
-  const [play] = useSound(boopSound);
+  const boopSound = new Audio(boopSrc);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const springProps: any = useSpring({
     display: 'inline-block',
@@ -53,13 +52,12 @@ const Boop = (props: BoopProps) => {
     setState(true);
     onClick();
     // Boop Sound
-    play();
+    boopSound.play();
   };
 
   return (
     <animated.span
       className={cx('will-change-auto', className)}
-      onMouseEnter={trigger}
       onClick={trigger}
       style={springProps}
     >

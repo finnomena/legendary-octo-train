@@ -7,7 +7,7 @@ import { ICreateRoom } from '../../../interfaces';
 import { createRoom } from '../../../queries';
 import { auth } from '../../../setup/firebase';
 
-type CreateRoomDialogProps = {
+type CreateRoomProps = {
   show: boolean;
   // eslint-disable-next-line no-unused-vars
   onHide: (show: boolean) => void;
@@ -17,7 +17,7 @@ const validateSchema = Yup.object().shape({
   name: Yup.string().required('*Required'),
 });
 
-const CreateRoomDialog = (props: CreateRoomDialogProps) => {
+const CreateRoom = (props: CreateRoomProps) => {
   const { show, onHide } = props;
   const [user] = useAuthState(auth);
   const initialValues: ICreateRoom = {
@@ -65,7 +65,7 @@ const CreateRoomDialog = (props: CreateRoomDialogProps) => {
 
             {/* Footer */}
             <ModalFooter>
-              <Button type="submit" full disabled={isSubmitting}>
+              <Button type="submit" color="blue" full disabled={isSubmitting}>
                 Create
               </Button>
             </ModalFooter>
@@ -76,4 +76,4 @@ const CreateRoomDialog = (props: CreateRoomDialogProps) => {
   );
 };
 
-export default CreateRoomDialog;
+export default CreateRoom;

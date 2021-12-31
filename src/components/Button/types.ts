@@ -1,14 +1,6 @@
-export type ButtonColor =
-  | 'black'
-  | 'white'
-  | 'gray'
-  | 'blue'
-  | 'red'
-  | 'yellow'
-  | 'green'
-  | 'indigo';
+export type ButtonColor = 'black' | 'white' | 'blue';
 
-export type ButtonSize = 'sm' | 'md' | 'lg';
+export type ButtonSize = 'sm' | 'md';
 
 export interface ButtonProps {
   color?: ButtonColor;

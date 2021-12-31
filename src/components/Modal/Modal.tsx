@@ -19,7 +19,7 @@ const Modal = (props: ModalProp) => {
         className="fixed inset-0 z-10 overflow-y-auto"
         onClose={onHide}
       >
-        <div className="min-h-screen px-4 text-center">
+        <div className="flex items-center justify-center min-h-screen px-4">
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
@@ -49,7 +49,7 @@ const Modal = (props: ModalProp) => {
             leaveFrom="opacity-100 scale-100"
             leaveTo="opacity-0 scale-95"
           >
-            <div className="inline-block items-center align-center bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg w-full">
+            <div className="relative bg-white rounded-2xl w-full max-w-md mx-auto">
               <Dialog.Title
                 as="h3"
                 className="text-lg font-medium text-center p-4 pb-2 leading-6 text-gray-900"
