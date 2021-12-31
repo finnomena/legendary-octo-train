@@ -3,7 +3,7 @@ import React from 'react';
 type LogoProps = {
   fontSize: string;
   fontWeight: string;
-  icon: boolean;
+  icon?: boolean;
 };
 
 const Logo = ({
@@ -18,6 +18,10 @@ const Logo = ({
       Popclap {icon && <span className="text-black">👏🏻</span>}
     </h1>
   );
+};
+
+Logo.defaultProps = {
+  icon: false,
 };
 
 export default Logo;
