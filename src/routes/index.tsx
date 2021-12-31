@@ -8,19 +8,6 @@ import MyPage from '../pages/My';
 import NotFoundPage from '../pages/NotFound';
 import AuthPrivateRoute from './AuthPrivateRoute';
 
-/**
- * Route
- * [Public Routes]
- * Home: /home (login to my page)
- * Logout: /logout
- * NotFound: *
- *
- *
- * [Private Routes]
- * Join: /join?rc=...
- * Start: Join: /join/room/?rc=...
- */
-
 const AppRoutes = () => {
   return (
     <Routes>
@@ -37,7 +24,6 @@ const AppRoutes = () => {
       </Route>
 
       <Route path="join" element={<RoomLayout />}>
-        <Route index element={<JoinPage />} />
         <Route path=":id" element={<JoinPage />} />
       </Route>
 

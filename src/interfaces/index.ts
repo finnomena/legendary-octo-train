@@ -24,7 +24,3 @@ export interface ICreateRoom {
   createdBy: string | null | undefined;
   createdAt: object;
 }
-
-export interface IUser {
-  displayName: string;
-}

@@ -7,15 +7,14 @@ import { getDatabase } from 'firebase/database';
 
 // this is where your firebase app values you copied will go
 const firebaseConfig = {
-  apiKey: 'AIzaSyDIZN87ZMv1p5_w3Qf7I2hFsOH6p8wYvVo',
-  authDomain: 'legendary-octo-train.firebaseapp.com',
-  databaseURL:
-    'https://legendary-octo-train-default-rtdb.asia-southeast1.firebasedatabase.app',
-  projectId: 'legendary-octo-train',
-  storageBucket: 'legendary-octo-train.appspot.com',
-  messagingSenderId: '1078349542925',
-  appId: '1:1078349542925:web:291a537ab416a26c638744',
-  measurementId: 'G-7LN34G7H4Z',
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  databaseURL: import.meta.env.VITE_DATABASE_URL,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_MEASUREMENT_ID,
 };
 
 const firebaseApp = initializeApp(firebaseConfig);

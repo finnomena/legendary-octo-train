@@ -6,9 +6,6 @@ export { default as Logo } from './Logo';
 export { default as Error } from './Error';
 export { default as Loading } from './Loading';
 
-// Form
-export { default as Input } from './Input';
-
 // Modal
 export { default as Modal } from './Modal/Modal';
 export { default as ModalBody } from './Modal/ModalBody';
