@@ -21,7 +21,7 @@ const Logo = ({
 };
 
 Logo.defaultProps = {
-  icon: false,
+  icon: true,
 };
 
 export default Logo;
