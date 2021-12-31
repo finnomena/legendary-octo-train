@@ -1,34 +1,35 @@
+import { serverTimestamp } from 'firebase/database';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import React from 'react';
-import { useAuthState } from 'react-firebase-hooks/auth';
+import { useParams } from 'react-router';
 import * as Yup from 'yup';
 import { Button, Modal, ModalBody, ModalFooter } from '../../../components';
-import { ICreateRoom } from '../../../interfaces';
-import { createRoom } from '../../../queries';
-import { auth } from '../../../setup/firebase';
+import { IQuestion } from '../../../interfaces';
+import { createQuestionByRoomId } from '../../../queries';
+import { JoinParams } from '../../../types';
 
-type CreateRoomDialogProps = {
+type CreateQuestionProps = {
   show: boolean;
   // eslint-disable-next-line no-unused-vars
   onHide: (show: boolean) => void;
 };
 
 const validateSchema = Yup.object().shape({
-  name: Yup.string().required('*Required'),
+  question: Yup.string().required('*Required'),
 });
 
-const CreateRoomDialog = (props: CreateRoomDialogProps) => {
+const CreateQuestion = (props: CreateQuestionProps) => {
   const { show, onHide } = props;
-  const [user] = useAuthState(auth);
-  const initialValues: ICreateRoom = {
-    name: '',
-    createdBy: user?.email,
-    createdAt: new Date(),
+  const { id } = useParams<keyof JoinParams>() as JoinParams;
+  const initialValues: IQuestion = {
+    question: '',
+    isAnswer: false,
+    createdAt: serverTimestamp(),
   };
 
-  const handleSubmit = async (values: ICreateRoom) => {
+  const handleSubmit = async (values: IQuestion) => {
     try {
-      await createRoom(values);
+      await createQuestionByRoomId(id, values);
       onHide(!show);
     } catch (error) {
       console.error('create room error: ', error);
@@ -36,7 +37,7 @@ const CreateRoomDialog = (props: CreateRoomDialogProps) => {
   };
 
   return (
-    <Modal title="Create room" show={show} onHide={onHide}>
+    <Modal title="Create Question" show={show} onHide={onHide}>
       <Formik
         className="flex flex-col"
         initialValues={initialValues}
@@ -49,14 +50,14 @@ const CreateRoomDialog = (props: CreateRoomDialogProps) => {
             <ModalBody>
               <div className="mb-2">
                 <Field
-                  id="name"
-                  name="name"
-                  title="Room Name"
-                  placeholder="Room: ex. Morning meeting"
+                  id="question"
+                  name="question"
+                  title="Your message"
+                  placeholder="type here..."
                   className="bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus-visible:outline-none focus:border-blue-500 block w-full p-2.5 invalid:border-red-500 invalid:text-red-600 focus:invalid:border-red-500 focus:invalid:ring-red-500"
                 />
                 <ErrorMessage
-                  name="name"
+                  name="question"
                   component="span"
                   className="text-sm text-red-500"
                 />
@@ -76,4 +77,4 @@ const CreateRoomDialog = (props: CreateRoomDialogProps) => {
   );
 };
 
-export default CreateRoomDialog;
+export default CreateQuestion;

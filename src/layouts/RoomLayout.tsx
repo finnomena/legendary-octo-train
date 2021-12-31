@@ -1,17 +1,12 @@
 import React from 'react';
-import { useDocumentDataOnce } from 'react-firebase-hooks/firestore';
+import { useObject } from 'react-firebase-hooks/database';
 import { Outlet, useParams } from 'react-router';
-import { useRecoilValue } from 'recoil';
-import { IRoom } from '../interfaces';
-import { getRoomByCodeQuery } from '../queries/room';
-import { userState } from '../store/atoms/user';
+import { fetchRoomById } from '../queries';
+import { JoinParams } from '../types';
 
 const RoomLayout = () => {
-  const { id } = useParams();
-  const user = useRecoilValue(userState);
-  const [room, loading, error] = useDocumentDataOnce<IRoom>(
-    getRoomByCodeQuery(id ?? '')
-  );
+  const { id } = useParams<keyof JoinParams>() as JoinParams;
+  const [snapshot, loading, error] = useObject(fetchRoomById(id));
 
   if (loading) {
     return <p>Loading...</p>;
@@ -20,14 +15,17 @@ const RoomLayout = () => {
   if (error) {
     console.log(error);
 
-    return <p>Loading...</p>;
+    return <p>Something error...</p>;
+  }
+
+  if (!snapshot?.exists()) {
+    return <span>Room not found</span>;
   }
 
   return (
     <>
       <header className="flex text-sm p-2 place-content-between">
-        <h1>{room?.name}</h1>
-        <span>{user?.displayName}</span>
+        Popclap
       </header>
       <div className="wrapper p-4 max-w-lg mx-auto">
         <main>

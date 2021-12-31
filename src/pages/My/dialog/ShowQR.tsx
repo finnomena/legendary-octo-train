@@ -18,13 +18,10 @@ const ShowQR = (props: ShowQRProps) => {
         <div className="flex flex-col gap-4 justify-center items-center">
           <QRCode
             size={200}
-            value={`${window.location.origin}/room/${id}`}
+            value={`${window.location.origin}/join/${id}`}
             renderAs="svg"
             className="mx-auto"
           />
-          <h2>
-            Code: <span className="font-semibold">{id}</span>
-          </h2>
         </div>
       </ModalBody>
       <ModalFooter>

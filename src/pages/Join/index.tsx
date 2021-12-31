@@ -1,8 +1,9 @@
 import React from 'react';
-import { useDocumentDataOnce } from 'react-firebase-hooks/firestore';
+import { useObjectVal } from 'react-firebase-hooks/database';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Button } from '../../components';
-import { getRoomByCodeQuery } from '../../queries/room';
+import { IRoom } from '../../interfaces';
+import { fetchRoomById } from '../../queries';
 import JoinForm from './components/JoinForm';
 
 const JoinPage = () => {
@@ -14,7 +15,7 @@ const JoinPage = () => {
     return <p>Invalid</p>;
   }
 
-  const [room, loading, error] = useDocumentDataOnce(getRoomByCodeQuery(code));
+  const [room, loading, error] = useObjectVal<IRoom>(fetchRoomById(code));
 
   if (loading) {
     return <p>Loading...</p>;

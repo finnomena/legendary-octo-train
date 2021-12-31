@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { useCollectionData } from 'react-firebase-hooks/firestore';
+import { useListVals } from 'react-firebase-hooks/database';
 import { Button } from '../../components';
-import { getRoomsByEmailQuery } from '../../queries/room';
+import { IRoom } from '../../interfaces';
+import { fetchMyRoomList } from '../../queries';
 import { auth } from '../../setup/firebase';
 import RoomCard from './components/RoomCard';
 import CreateRoomDialog from './dialog/CreateRoomDialog';
@@ -10,10 +11,13 @@ import CreateRoomDialog from './dialog/CreateRoomDialog';
 const MyPage = () => {
   const [show, setShow] = useState<boolean>(false);
   const [user] = useAuthState(auth);
-  const [rooms, loading, error] = useCollectionData<Room, 'id'>(
-    getRoomsByEmailQuery(user?.email ?? ''),
-    { idField: 'id', snapshotListenOptions: { includeMetadataChanges: true } }
+  const [rooms, loading, error] = useListVals<IRoom>(
+    fetchMyRoomList(user?.email ?? ''),
+    { keyField: 'id' }
   );
+
+  console.log(rooms);
+  console.log(error);
 
   if (error) {
     return <strong>Error: {JSON.stringify(error)}</strong>;

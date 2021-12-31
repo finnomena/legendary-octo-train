@@ -1,15 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 import { getDatabase } from 'firebase/database';
-import {
-  collection,
-  CollectionReference,
-  doc,
-  DocumentData,
-  DocumentReference,
-  getFirestore,
-} from 'firebase/firestore';
-
 /**
  * Setup firebase with custom config 🔥
  */
@@ -31,14 +22,4 @@ const firebaseApp = initializeApp(firebaseConfig);
 
 // Firebase Services
 export const auth = getAuth(firebaseApp);
-export const db = getFirestore(firebaseApp);
-export const rtDb = getDatabase(firebaseApp);
-
-export const getCollectionRef = <T = DocumentData>(name: string) =>
-  collection(db, name) as unknown as CollectionReference<T>;
-
-export const getDocRef = <T = DocumentData>(path: string, id?: string) => {
-  const ref = id ? doc(db, path, id) : doc(db, path);
-
-  return ref as unknown as DocumentReference<T>;
-};
+export const db = getDatabase(firebaseApp);

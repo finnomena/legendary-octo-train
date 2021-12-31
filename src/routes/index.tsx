@@ -1,5 +1,5 @@
 import React from 'react';
-import { Outlet, Route, Routes } from 'react-router';
+import { Route, Routes } from 'react-router';
 import { AppLayout, RoomLayout } from '../layouts';
 import SignOut from '../pages/auth/signOut';
 import HomePage from '../pages/Home';
@@ -7,7 +7,7 @@ import JoinPage from '../pages/Join';
 import MyPage from '../pages/My';
 import NotFoundPage from '../pages/NotFound';
 import RoomPage from '../pages/Room';
-import { AuthPrivateRoute, LocalPrivateRoute } from './protected';
+import AuthPrivateRoute from './AuthPrivateRoute';
 
 /**
  * Route
@@ -37,14 +37,9 @@ const AppRoutes = () => {
         </Route>
       </Route>
 
-      <Route path="join" element={<Outlet />}>
+      <Route path="join" element={<RoomLayout />}>
         <Route index element={<JoinPage />} />
-        {/* Protect */}
-        <Route element={<LocalPrivateRoute />}>
-          <Route element={<RoomLayout />}>
-            <Route path="room/:id" element={<RoomPage />} />
-          </Route>
-        </Route>
+        <Route path=":id" element={<RoomPage />} />
       </Route>
 
       {/* <Route path="join" element={<JoinPage />}>

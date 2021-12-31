@@ -1,7 +1,7 @@
 import React from 'react';
 import { useObjectVal } from 'react-firebase-hooks/database';
 import { Boop } from '../../components';
-import { readClickByRoomRef, writeClickByRoomRef } from '../../queries/room';
+import { readClapById, writeIncClapById } from '../../queries';
 
 type ClickProps = {
   id: string;
@@ -9,9 +9,7 @@ type ClickProps = {
 
 const Click = (props: ClickProps) => {
   const { id } = props;
-  const [clickValue, loading, error] = useObjectVal<number>(
-    readClickByRoomRef(id)
-  );
+  const [clickValue, loading, error] = useObjectVal<number>(readClapById(id));
 
   return (
     <>
@@ -27,18 +25,7 @@ const Click = (props: ClickProps) => {
         </h1>
       )}
       {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events */}
-      <div className="flex justify-center items-center w-64 px-6 py-16 mx-auto">
-        <Boop
-          className="text-9xl py-4 remove_tap_hilight"
-          scale={0.8}
-          timing={100}
-          onClick={() => {
-            writeClickByRoomRef(id);
-          }}
-        >
-          👏🏻
-        </Boop>
-      </div>
+      <div className="flex justify-center items-center w-64 px-6 py-16 mx-auto"></div>
     </>
   );
 };
